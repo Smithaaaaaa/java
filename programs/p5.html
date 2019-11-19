@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>eclipse neon 3</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        /*
+        <applet code="MouseEvents" width=3 00 height=3 00>
+        </applet>
+        */ import java.awt.*; import java.awt.event.*; import java.applet.*; public class MouseEvents extends Applet implements MouseListener, MouseMotionListener { int mousex = 0, mousey = 0; String msg = ""; public void init() { addMouseListener(this); addMouseMotionListener(this);
+        } public void mouseClicked(MouseEvent e) { mousex = 0; mousey = 10; msg = "Mouse Clicked"; repaint(); } public void mousePressed(MouseEvent e) { mousex = e.getX(); mousey = e.getY(); msg = "Mouse Pressed"; repaint(); } public void mouseMoved(MouseEvent
+        e) { showStatus("Mouse moved at :" + e.getX() + "," + e.getY()); } public void mouseReleased(MouseEvent e) { mousex = e.getX(); mousey = e.getY(); msg = "Mouse Released"; repaint(); } public void mouseEntered(MouseEvent e) { mousex = 0; mousey
+        = 10; msg = "Mouse Entered"; repaint(); } public void mouseDragged(MouseEvent e) { mousex = e.getX(); mousey = e.getY(); msg = "Mouse Dragged"; repaint(); } public void mouseExited(MouseEvent e) { mousex = 0; mousey = 10; msg = "Mouse Exited";
+        repaint(); } public void paint(Graphics g) { g.drawString(msg, mousex, mousey); } }
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="container-fluid">
+        import java.awt.*; import java.applet.*; /*
+        <applet code="ParamDemo" width=300 height=80>
+            <param name=fontName value=Courier>
+            <param name=fontSize value=14>
+            <param name=leading value=2>
+            <param name=accountEnabled value=true>
+        </applet>
+        */ public class ParamDemo extends Applet{ String fontName; int fontSize; float leading; boolean active; // Initialize the string to be displayed. public void start() { String param; fontName = getParameter("fontName"); if(fontName == null) fontName =
+        "Not 222"; param = getParameter("fontSize"); try { if(param != null) // if not found fontSize = Integer.parseInt(param); else fontSize = 0; } catch(NumberFormatException e) { fontSize = -1; } param = getParameter("leading"); try { if(param !=
+        null) // if not found leading = Float.valueOf(param).floatValue(); else leading = 0; } catch(NumberFormatException e) { leading = -1; } param = getParameter("accountEnabled"); if(param != null) active = Boolean.valueOf(param).booleanValue(); }
+        // Display parameters. public void paint(Graphics g) { g.drawString("Font name: " + fontName, 0, 10); g.drawString("Font size: " + fontSize, 0, 26); g.drawString("Leading: " + leading, 0, 42); g.drawString("Account Active: " + active, 0, 58);
+        } }
+    </div>
+</body>
+
+</html>

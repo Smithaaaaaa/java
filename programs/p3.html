@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>eclipse neon 3</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        class ThreadClass implements Runnable { long click=0; Thread t; private volatile boolean running =true; public ThreadClass(int p) { t=new Thread(this); t.setPriority(p); } public void run() { while(running) { click++; } } public void stop() { running
+        =false; } public void start() { t.start(); } }
+    </div>
+    <br/>
+    <div class="container-fluid">
+        public class Demo { public static void main(String args[]) { Thread.currentThread().setPriority(Thread.MAX_PRIORITY); ThreadClass hi1=new ThreadClass(Thread.NORM_PRIORITY + 2); ThreadClass hi2=new ThreadClass(Thread.NORM_PRIORITY -2); ThreadClass hi3=new
+        ThreadClass(Thread.NORM_PRIORITY + 3); ThreadClass hi4=new ThreadClass(Thread.NORM_PRIORITY - 3); ThreadClass hi5=new ThreadClass(Thread.NORM_PRIORITY +4); hi1.start(); hi2.start(); hi3.start(); hi4.start(); hi5.start(); System.out.println("thread
+        one is alive:" +hi1.t.isAlive()); System.out.println("thread two is alive:" +hi2.t.isAlive()); System.out.println("thread three is alive:" +hi3.t.isAlive()); System.out.println("thread four is alive:" +hi4.t.isAlive()); System.out.println("thread
+        four is alive:" +hi5.t.isAlive()); try { hi5.t.sleep(1000); hi3.t.sleep(1000); } catch(InterruptedException e){ System.out.println("main thread interrupted"); } hi1.stop(); hi2.stop(); hi3.stop(); hi4.stop(); hi5.stop(); try { System.out.println("waiting
+        for threads to finish"); hi1.t.join(); hi2.t.join(); hi3.t.join(); hi4.t.join(); hi5.t.join(); } catch(InterruptedException e) { System.out.println("main thread interrupted"); } System.out.println("priority of thread1:" +hi1.t.getPriority());
+        System.out.println("priority of thread2:" +hi2.t.getPriority()); System.out.println("priority of thread3:" +hi3.t.getPriority()); System.out.println("priority of thread4:" +hi4.t.getPriority()); System.out.println("priority of thread5:" +hi5.t.getPriority());
+        System.out.println("thread one is alive:" +hi1.t.isAlive()); System.out.println("thread two is alive:" +hi2.t.isAlive()); System.out.println("thread three is alive:" +hi3.t.isAlive()); System.out.println("thread four is alive:" +hi4.t.isAlive());
+        System.out.println("thread five is alive:" +hi5.t.isAlive()); System.out.println("main thread exiting"); } }
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="container-fluid">
+        class Q { int n; boolean valueset = false; synchronized int get() { while (!valueset) try { wait(); } catch (InterruptedException e) { System.out.println("Thread Interrupted"); } System.out.println("Got :" + n); valueset = false; notify(); return n; }
+        synchronized void put(int n) { while (valueset) try { wait(); } catch (InterruptedException e) { System.out.println("Thread interrupted"); } this.n = n; valueset = true; System.out.println("put " + n); notify(); } } class Producer implements Runnable
+        { Q q; Producer(Q q) { this.q = q; new Thread(this, "Producer").start(); } public void run() { int i = 0; while (true) { q.put(i++); } } } class Consumer implements Runnable { Q q; Consumer(Q q) { this.q = q; new Thread(this, "Consumer").start();
+        } public void run() { int i = 0; while (true) { q.get(); } } } class Demo { public static void main(String args[]) { Q q = new Q(); new Producer(q); new Consumer(q); System.out.println("press ctrl+c to exit"); } }
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>eclipse neon 3</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        class A { int x,y; void showxy() { System.out.println("x ="+ x + "\ny =" + y ); } } class B extends A { int z; void showz() { System.out.println("z ="+z); System.out.println("x+y+z =" + (x + y + z)); } } class inheridemo { public static void main(String
+        a[]) { A baseob=new A(); B derob=new B(); baseob.x=10; baseob.y=20; System.out.println("Contents of base class object :"); baseob.showxy(); derob.x=3; derob.y= 4; derob.z=5; System.out.println("Contents of derived class object :"); derob.showxy();
+        derob.showz(); } }
+
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="container-fluid">
+        class FinallyDemo { //throw an exception out of the method static void procA() { try { System.out.println("inside procA"); throw new RuntimeException("demo"); } finally { System.out.println("Proc A's finally"); } } // return from within a try block static
+        void procB() { try { System.out.println("inside procB"); return; } finally { System.out.println("procB's finally"); } } //execute a try block normally static void procC() { try { System.out.println("Inside procC"); } finally { System.out.println("procC's
+        finally"); } } public static void main(String args[]) { try { procA(); } catch (Exception e) { System.out.println("Exception caught"); } procB(); procC(); } }
+    </div>
+</body>
+
+</html>
